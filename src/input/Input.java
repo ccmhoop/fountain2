@@ -1,9 +1,10 @@
-package player;
+package input;
+
 import java.util.Scanner;
 
-public class PlayerInput {
+public class Input {
 
-    public static String inputcheck() {
+    public String inputcheck() {
         Scanner scanner = new Scanner(System.in);
         String input;
         while (true) {

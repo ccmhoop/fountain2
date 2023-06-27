@@ -29,8 +29,8 @@ public class MapGenerator extends Generator {
         for (int i = 0; i < repeats; i++) {
             for (int j = 0; j <= 2; j++) {
                 while (true) {
-                    int y = rnd.nextInt(0, size - 1);
-                    int x = rnd.nextInt(0, size - 1);
+                    int y = rnd.nextInt(0, size );
+                    int x = rnd.nextInt(0, size );
                     if (gameGrid[y][x].equals("0")) {
                         events(y, x, j);
                         break;
@@ -45,7 +45,6 @@ public class MapGenerator extends Generator {
             case 0 -> gameGrid[y][x] = ("p");
             case 1 -> gameGrid[y][x] = ("m");
             case 2 -> gameGrid[y][x] = ("a");
-
         }
     }
 
