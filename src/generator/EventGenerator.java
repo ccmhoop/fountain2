@@ -4,39 +4,68 @@ import java.util.Random;
 
 public class EventGenerator extends Generator {
 
-    public EventGenerator(int size) {
-        addEvents(size);
+    public EventGenerator() {
+        randomEventGenerator();
     }
 
-    private void addEvents(int size) {
+    private void randomEventGenerator() {
         Random rnd = new Random();
-        int repeats = 0;
-        gameGrid[0][0] = "e";
-        gameGrid[size - 1][size - 1] = "f";
-        switch (size) {
-            case 4 -> repeats = 1;
-            case 6 -> repeats = 2;
-            case 8 -> repeats = 3;
-        }
-        for (int i = 0; i < repeats; i++) {
-            for (int j = 0; j <= 2; j++) {
-                while (true) {
-                    int y = rnd.nextInt(0, size);
-                    int x = rnd.nextInt(0, size);
-                    if (gameGrid[y][x].equals("0")) {
-                        events(y, x, j);
-                        break;
-                    }
+        gameGrid[0][0] = "entrance";
+        gameGrid[mapSize - 1][mapSize - 1] = "fountain";
+        for (int i = 1; i <= gameMode(); i++) {
+            while (true) {
+                int y = rnd.nextInt(0, Generator.mapSize);
+                int x = rnd.nextInt(0, Generator.mapSize);
+                if (gameGrid[y][x].equals("0")) {
+                    generateEvents(y, x, i);
+                    break;
                 }
             }
         }
     }
 
-    private void events(int y, int x, int inc) {
-        switch (inc) {
-            case 0 -> gameGrid[y][x] = ("p");
-            case 1 -> gameGrid[y][x] = ("m");
-            case 2 -> gameGrid[y][x] = ("a");
+    private int gameMode() {
+        int repeat = 0;
+        switch (mapSize) {
+            case 4 -> repeat = eventAmount(2, 1, 2, 3);
+            case 6 -> repeat = eventAmount(2, 1, 2, 5);
+            case 8 -> repeat = eventAmount(4, 2, 3, 9);
+        }
+        return repeat;
+    }
+
+    private int eventAmount(int pit, int maelstrom, int amarok, int repeat) {
+        if (!hardMode) {
+            switch (gameType) {
+                case "p" -> repeat = pit;
+                case "m" -> repeat = maelstrom;
+                case "a" -> repeat = amarok;
+            }
+        }
+        return repeat;
+    }
+
+    private void generateEvents(int y, int x, int increment) {
+        if (hardMode) {
+            generateHardMode(y, x, increment);
+        } else {
+            generateNormalMode(y, x);
+        }
+    }
+
+    private void generateNormalMode(int y, int x) {
+        switch (gameType) {
+            case "p" -> gameGrid[y][x] = ("pit");
+            case "m" -> gameGrid[y][x] = ("maelstrom");
+            case "a" -> gameGrid[y][x] = ("amarok");
+        }
+    }
+
+    private void generateHardMode(int y, int x, int increment) {
+        switch (increment) {
+            case 1, 4, 6, 9 -> gameGrid[y][x] = ("pit");
+            case 2, 7 -> gameGrid[y][x] = ("maelstrom");
+            case 3, 5, 8 -> gameGrid[y][x] = ("amarok");
         }
     }
 }

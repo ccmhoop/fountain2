@@ -5,12 +5,12 @@ import generator.Generator;
 
 public class Event extends Entity {
 
-    public void event(int size) {
+    public void event() {
         switch (Generator.gameGrid[Entity.playerYAxis][Entity.playerXAxis]) {
-            case "a", "p" -> Game.loopGame = false;
-            case "m" -> moveMaelstrom(Entity.playerYAxis, Entity.playerXAxis, size);
-            case "f" -> activateFountain();
-            case "e" -> {
+            case "amarok", "pit" -> Game.loopGame = false;
+            case "maelstrom" -> moveMaelstrom(Entity.playerYAxis, Entity.playerXAxis);
+            case "fountain" -> activateFountain();
+            case "entrance" -> {
                 if (Entity.fountain) {
                     System.out.println("The Fountain of Objects has been reactivated, and you have escaped with your life!");
                     Game.loopGame = false;
@@ -25,10 +25,10 @@ public class Event extends Entity {
         }
     }
 
-    private void moveMaelstrom(int y, int x, int size) {
+    private void moveMaelstrom(int y, int x) {
         Generator.gameGrid[y][x] = ("0");
-        if (y + 1 >= size - 1) {
-            y = size - 1;
+        if (y + 1 >= Generator.mapSize - 1) {
+            y = Generator.mapSize - 1;
         } else {
             y += 1;
         }
@@ -37,18 +37,18 @@ public class Event extends Entity {
         } else {
             x -= 2;
         }
-        displacePlayer(size);
+        displacePlayer();
         Generator.gameGrid[y][x] = ("m");
     }
 
-    private void displacePlayer(int size) {
+    private void displacePlayer() {
         if (Entity.playerYAxis - 1 <= 0) {
             Entity.playerYAxis = 0;
         } else {
             Entity.playerYAxis -= 1;
         }
-        if (Entity.playerXAxis + 2 >= size - 1) {
-            Entity.playerXAxis = size - 1;
+        if (Entity.playerXAxis + 2 >= Generator.mapSize - 1) {
+            Entity.playerXAxis = Generator.mapSize - 1;
         } else {
             Entity.playerXAxis += 2;
         }

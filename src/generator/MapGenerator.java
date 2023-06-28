@@ -1,13 +1,13 @@
 package generator;
 
 public class MapGenerator extends Generator {
-    public MapGenerator(int size) {
-        generateGame(size);
+    public MapGenerator() {
+        generateGame();
     }
 
-    private void generateGame(int size) {
-        for (int rows = 0; rows < (size); rows++) {
-            for (int column = 0; column < size; column++) {
+    private void generateGame() {
+        for (int rows = 0; rows < Generator.mapSize; rows++) {
+            for (int column = 0; column < Generator.mapSize; column++) {
                 gameGrid[rows][column] = "0";
             }
         }

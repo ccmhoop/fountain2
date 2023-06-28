@@ -12,11 +12,11 @@ public class Entity {
     protected boolean maelstrom;
     protected boolean pit;
 
-    public int getX() {
+    public int getPlayerXAxis() {
         return playerXAxis;
     }
 
-    public int getY() {
+    public int getPlayerYAxis() {
         return playerYAxis;
     }
 
