@@ -6,36 +6,36 @@ public class Player extends Entity {
 
     public void playerPosition(int size) {
         String check = input.inputcheck();
-        if (positionY == 0 && check.equals("w") || positionX == 0 && check.equals("a")) {
+        if (playerYAxis == 0 && check.equals("w") || playerXAxis == 0 && check.equals("a")) {
             System.out.println("you hit yo head");
-        } else if (positionY == size - 1 && check.equals("s") || positionX == size - 1 && check.equals("d")) {
+        } else if (playerYAxis == size - 1 && check.equals("s") || playerXAxis == size - 1 && check.equals("d")) {
             System.out.println("you hit yo head");
         } else {
             playerMove(check);
         }
     }
 
-    public void playerSense() {
+    public void radar() {
         for (int i = 0; i <= 2; i++) {
             for (int j = 0; j <= 2; j++) {
-                setAntiSpamSense(i, j);
+                radarSpamControl(i, j);
             }
         }
-        antiSenseSpam();
+        radarMessage();
     }
 
     private void playerMove(String input) {
         switch (input) {
-            case "w" -> positionY--;
-            case "s" -> positionY++;
-            case "d" -> positionX++;
-            case "a" -> positionX--;
+            case "w" -> playerYAxis--;
+            case "s" -> playerYAxis++;
+            case "d" -> playerXAxis++;
+            case "a" -> playerXAxis--;
         }
     }
 
-    private void setAntiSpamSense(int forI, int forJ) {
+    private void radarSpamControl(int forI, int forJ) {
         try {
-            switch (Generator.gameGrid[positionY - 1 + forI][positionX - 1 + forJ]) {
+            switch (Generator.gameGrid[playerYAxis - 1 + forI][playerXAxis - 1 + forJ]) {
                 case "a" -> amarok = true;
                 case "m" -> maelstrom = true;
                 case "p" -> pit = true;
@@ -44,7 +44,7 @@ public class Player extends Entity {
         }
     }
 
-    private void antiSenseSpam() {
+    private void radarMessage() {
         if (pit) {
             System.out.println("You feel a draft. There is a pit in a nearby room.\n");
         }

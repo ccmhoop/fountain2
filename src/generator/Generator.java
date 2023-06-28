@@ -7,6 +7,7 @@ public class Generator {
     public void runGenerator(int size) {
         gameGrid = new String[size][size];
         new MapGenerator(size);
+        new EventGenerator(size);
     }
 
 }

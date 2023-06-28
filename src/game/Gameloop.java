@@ -1,15 +1,11 @@
-package gameLoop;
+package game;
 
-import entity.Entity;
-import entity.Monster;
 import entity.Player;
 import generator.Generator;
-import input.Input;
+import generator.MapGenerator;
 
-public class Gameloop {
-    Monster monster = new Monster();
-    Input input = new Input();
-    Entity entity = new Entity();
+public class Gameloop extends Game {
+
 
     public void GameLoop() {
         Generator generator = new Generator();
@@ -17,10 +13,13 @@ public class Gameloop {
         GameMessage message = new GameMessage();
         int size = Integer.parseInt(input.inputcheck());
         generator.runGenerator(size);
-        while (true) {
-            message.gameMessage(size);
-            player.playerSense();
+        while (loopGame) {
+            System.out.println(entity.getY() + " " + entity.getX());
+            MapGenerator.mapPrinter(size);
+            player.radar();
             player.playerPosition(size);
+            message.gameMessage();
+            event.event(size);
         }
     }
 

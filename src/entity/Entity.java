@@ -4,19 +4,20 @@ package entity;
 import input.Input;
 
 public class Entity {
+    protected static int playerXAxis = 0;
+    protected static int playerYAxis = 0;
+    protected static boolean fountain = false;
     protected Input input = new Input();
-    protected static int positionX = 0;
-    protected static int positionY = 0;
     protected boolean amarok;
     protected boolean maelstrom;
     protected boolean pit;
 
     public int getX() {
-        return positionX;
+        return playerXAxis;
     }
 
     public int getY() {
-        return positionY;
+        return playerYAxis;
     }
 
 }
