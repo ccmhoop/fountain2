@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class GameMenu extends Game {
 
-    Scanner scan = new Scanner(System.in);
+    private final Scanner scan = new Scanner(System.in);
 
     public void gameStartMenu() {
         menuGameMode();
