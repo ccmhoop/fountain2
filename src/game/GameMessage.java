@@ -47,7 +47,7 @@ public class GameMessage extends Game {
     public static final String AMAROK_HIT = """
                         
             In the pitch-black depths of the cave, guided solely by the putrid stench of the Amarok, you
-            unleashed an arrow.As your arrow sliced through through the veil of darkness, it found its mark, striking the
+            unleashed an arrow.As your arrow sliced through the veil of darkness, it found its mark, striking the
             Amarok with deadly precision a satisfying thud can be heard, momentarily quelling the beast's ferocity.
             """;
     public static final String FOUNTAIN_ACTIVATED = "You hear the rushing waters from the Fountain of Objects. It has been reactivated!";
