@@ -4,7 +4,6 @@ import enums.Color;
 import game.Game;
 import game.GameMessage;
 import generator.Generator;
-
 import java.util.Scanner;
 
 public class Player extends Entity {
