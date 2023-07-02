@@ -1,6 +1,7 @@
 package generator;
 
 import entity.Entity;
+
 import java.util.Random;
 
 public class EventGenerator extends Generator {
@@ -13,7 +14,7 @@ public class EventGenerator extends Generator {
         gameGrid[0][Entity.getPlayerXAxis()] = "entrance";
         //places fountain
         gameGrid[mapSize - 1][rnd.nextInt(0, Generator.mapSize)] = "fountain";
-        //places event according to game mode
+        //places events according to game mode. "Because of rnd.nextInt other events won't be overwritten"
         for (int i = 1; i <= eventLoopLimiter(); i++) {
             while (true) {
                 int mapYAxis = rnd.nextInt(0, Generator.mapSize);
@@ -38,7 +39,7 @@ public class EventGenerator extends Generator {
     }
 
     private static int gameModeSpawnLimiter(int pit, int maelstrom, int amarok, int hardmode) {
-        //Hard mode skips Switch(gametype). and returns default parameter value which is related to hardmode and mapsize.
+        //Hard mode skips Switch(game type). and returns default parameter value which is related to hard mode and map size.
         if (!hardMode) {
             return switch (gameType) {
                 case "p" -> pit;

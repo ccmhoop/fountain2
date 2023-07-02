@@ -4,6 +4,7 @@ import enums.Color;
 import game.Game;
 import game.GameMessage;
 import generator.Generator;
+
 import java.util.Scanner;
 
 public class Player extends Entity {
@@ -16,7 +17,7 @@ public class Player extends Entity {
 
     //checks for playerInput and executes actions according to events
     public void playerInput() {
-        radar();
+        playerRadar();
         Game.nextTurn = false;
         while (!Game.nextTurn) {
             movePlayer = true;
@@ -28,9 +29,10 @@ public class Player extends Entity {
         }
     }
 
+    //method changes message feedback when the player is at the fountain
     private void playerInteractFountain(String input) {
         if (Generator.getGameGrid().equals("fountain")) {
-            if (input.equals("y") && !Event.fountain) {
+            if (input.equalsIgnoreCase("y") && !Event.fountain) {
                 Event.fountain = true;
                 System.out.println(Color.YELLOW.txtColor + GameMessage.FOUNTAIN_ACTIVATED);
             }
@@ -54,7 +56,7 @@ public class Player extends Entity {
     //---------------player actions uses shoot(); and shoot uses enemyHit()---------------------------
     private void playerActions(String input) {
         if (Game.weaponMode) {
-            shoot(Entity.getPlayerYAxis(), Entity.getPlayerXAxis(), input);
+            playerShoot(Entity.getPlayerYAxis(), Entity.getPlayerXAxis(), input);
         }
         if (Player.movePlayer) {
             switch (input) {
@@ -66,17 +68,17 @@ public class Player extends Entity {
         }
     }
 
-    private void shoot(int playerY, int playerX, String input) {
+    private void playerShoot(int playerY, int playerX, String input) {
         if (arrow > 0) {
             switch (input) {
-                case "s.n" -> enemyHit(--playerY, playerX);
-                case "s.ne" -> enemyHit(--playerY, ++playerX);
-                case "s.e" -> enemyHit(playerY, ++playerX);
-                case "s.se" -> enemyHit(++playerY, ++playerX);
-                case "s.s" -> enemyHit(++playerY, playerX);
-                case "s.sw" -> enemyHit(++playerY, --playerX);
-                case "s.w" -> enemyHit(playerY, --playerX);
-                case "s.nw" -> enemyHit(--playerY, --playerX);
+                case "s.n" -> playerEnemyHitCheck(--playerY, playerX);
+                case "s.ne" -> playerEnemyHitCheck(--playerY, ++playerX);
+                case "s.e" -> playerEnemyHitCheck(playerY, ++playerX);
+                case "s.se" -> playerEnemyHitCheck(++playerY, ++playerX);
+                case "s.s" -> playerEnemyHitCheck(++playerY, playerX);
+                case "s.sw" -> playerEnemyHitCheck(++playerY, --playerX);
+                case "s.w" -> playerEnemyHitCheck(playerY, --playerX);
+                case "s.nw" -> playerEnemyHitCheck(--playerY, --playerX);
                 default -> {
                     return;
                 }
@@ -87,7 +89,7 @@ public class Player extends Entity {
         }
     }
 
-    private void enemyHit(int playerY, int playerX) {
+    private void playerEnemyHitCheck(int playerY, int playerX) {
         //Main If statement fixes index out of bounds
         if (playerY >= 0 && playerY < Generator.mapSize && playerX >= 0 && playerX < Generator.mapSize) {
             if (Generator.gameGrid[playerY][playerX].equals("maelstrom")) {
@@ -101,7 +103,7 @@ public class Player extends Entity {
         }
     }
 
-    private void radar() {
+    private void playerRadar() {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 radarSpamControl(i, j);
@@ -113,15 +115,15 @@ public class Player extends Entity {
     private void radarSpamControl(int loopI, int loopJ) {
         try {
             if (Generator.gameGrid[playerYAxis + loopI][playerXAxis + loopJ].equals("amarok") && !amarok) {
-                System.out.println(Color.RED.txtColor + "You can smell the rotten stench of an Amarok in a nearby room.\n");
+                System.out.println(Color.RED.txtColor + "\nYou can smell the rotten stench of an Amarok in a nearby room.\n");
                 amarok = true;
             }
             if (Generator.gameGrid[playerYAxis + loopI][playerXAxis + loopJ].equals("maelstrom") && !maelstrom) {
-                System.out.println(Color.CYAN.txtColor + "You hear the growling and groaning of a maelstrom nearby.\n");
+                System.out.println(Color.CYAN.txtColor + "\nYou hear the growling and groaning of a maelstrom nearby.\n");
                 maelstrom = true;
             }
             if (Generator.gameGrid[playerYAxis + loopI][playerXAxis + loopJ].equals("pit") && !pit) {
-                System.out.println(Color.PURPLE.txtColor + "You feel a draft. There is a pit in a nearby room.\n");
+                System.out.println(Color.PURPLE.txtColor + "\nYou feel a draft. There is a pit in a nearby room.\n");
                 pit = true;
             }
         } catch (IndexOutOfBoundsException ignored) {

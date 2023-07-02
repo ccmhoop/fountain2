@@ -13,7 +13,7 @@ public class GameMenu extends Game {
         menuGameMode();
         GameMessage.gameSettingMessage();
         menuActivateWeaponMode();
-        mapSize();
+        menuMapSize();
     }
 
     private void menuGameMode() {
@@ -32,7 +32,7 @@ public class GameMenu extends Game {
         }
     }
 
-    private void mapSize() {
+    private void menuMapSize() {
         System.out.println(GameMessage.GAME_SIZE_MESSAGE);
         while (Input.inputMenuMismatchCheck()) {
             switch (scan.next()) {
@@ -49,8 +49,8 @@ public class GameMenu extends Game {
             System.out.println("\nDo you want to Activate Weapon mode? y/n?\n");
             while (Input.inputMenuMismatchCheck()) {
                 switch (scan.next()) {
-                    case "y" -> weaponMode = true;
-                    case "n" -> Input.checkMenuInput = "n";
+                    case "Y","y" -> weaponMode = true;
+                    case "N","n" -> Input.checkMenuInput = "n";
                     default -> Input.checkMenuInput = "mismatch";
                 }
             }

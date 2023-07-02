@@ -16,7 +16,7 @@ public class Event extends Entity {
                 audioPlayer("src/entity/sound/Dead.wav");
                 Game.gameActive = false;
             }
-            case "maelstrom" -> moveMaelstrom(Entity.playerYAxis, Entity.playerXAxis);
+            case "maelstrom" -> eventMoveMaelstrom(Entity.playerYAxis, Entity.playerXAxis);
             case "entrance" -> {
                 if (fountain) {
                     System.out.println(Color.YELLOW.txtColor + "The Fountain of Objects has been reactivated, and you have escaped with your life!");
@@ -28,7 +28,7 @@ public class Event extends Entity {
     }
 
     //moves the maelstrom around when player moves into its room according to map size
-    private void moveMaelstrom(int y, int x) {
+    private void eventMoveMaelstrom(int y, int x) {
         Generator.gameGrid[y][x] = ("0");
         if (y + 1 >= Generator.mapSize - 1) {
             y = Generator.mapSize - 1;
@@ -40,7 +40,7 @@ public class Event extends Entity {
         } else {
             x -= 2;
         }
-        displacePlayer();
+        eventDisplacePlayer();
         //When the maelstrom is moved it won't overwrite other events
         switch (Generator.gameGrid[y][x]) {
             case "amarok", "pit" -> x++;
@@ -54,7 +54,7 @@ public class Event extends Entity {
     }
 
     //moves the player when player moves into the maelstrom room according to map size
-    private void displacePlayer() {
+    private void eventDisplacePlayer() {
         if (Entity.playerYAxis - 1 <= 0) {
             Entity.playerYAxis = 0;
         } else {

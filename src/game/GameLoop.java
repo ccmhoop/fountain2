@@ -9,9 +9,8 @@ public class GameLoop extends Game {
         GameMessage message = new GameMessage();
         while (gameActive) {
             player.playerInput();
-            message.triggeredEventMessages();
+            message.runningGameMessages();
             event.event();
-            System.out.println("\033[0m");
         }
     }
 }

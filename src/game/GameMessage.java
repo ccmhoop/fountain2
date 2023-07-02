@@ -52,10 +52,6 @@ public class GameMessage extends Game {
             """;
     public static final String FOUNTAIN_ACTIVATED = "You hear the rushing waters from the Fountain of Objects. It has been reactivated!";
 
-    public void triggeredEventMessages() {
-        runningGameMessages();
-    }
-
     public static void movementMessages(String input) {
         if (Entity.getPlayerYAxis() == 0 && input.equals("w") || Entity.getPlayerXAxis() == 0 && input.equals("a")) {
             System.out.println(Color.RED.txtColor + "you hit a wall\n");
@@ -134,7 +130,7 @@ public class GameMessage extends Game {
         }
     }
 
-    private void runningGameMessages() {
+    public void runningGameMessages() {
         if (gameActive) {
             switch (Generator.getGameGrid()) {
                 case "amarok" -> System.out.println(Color.RED.txtColor + """
@@ -157,8 +153,8 @@ public class GameMessage extends Game {
                         your terrified screams fading into the abyss below.
                         """);
                 case "fountain" -> fountainMessage();
-                case "entrance" ->
-                        System.out.println(Color.YELLOW.txtColor + "\nYou see light coming from the cavern entrance.");
+                case "entrance" -> System.out.println(Color.YELLOW.txtColor +
+                        "\nYou see light coming from the cavern entrance.");
             }
         }
     }
