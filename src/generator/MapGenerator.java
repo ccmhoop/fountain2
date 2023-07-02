@@ -5,7 +5,8 @@ public class MapGenerator extends Generator {
         generateGame();
     }
 
-    private void generateGame() {
+    //----------------------------Fills gameGrid with String="0"--------------------------------------------------------
+    public static void generateGame() {
         for (int rows = 0; rows < Generator.mapSize; rows++) {
             for (int column = 0; column < Generator.mapSize; column++) {
                 gameGrid[rows][column] = "0";
@@ -13,6 +14,7 @@ public class MapGenerator extends Generator {
         }
     }
 
+    //---------------Prints gameGrid for visual feedback----------------------------------------------------------------
     public static void mapPrinter(int size) {
         int printRoom = 0;
         for (int rows = 0; rows < size; rows++) {

@@ -1,22 +1,18 @@
 package input;
 
-import java.util.Scanner;
-
 public class Input {
 
-    public String inputcheck() {
-        Scanner scanner = new Scanner(System.in);
-        String input;
-        while (true) {
-            input = scanner.next();
-            if (input.matches("[a-zA-Z]+")) {
-                break;
-            } else if (input.matches("[0-9]+")) {
-                input.trim();
-                break;
-            }
-        }
-        return input;
+    public static String checkMenuInput = "mismatch";
+
+    //keeps while loop running in GameMenu if input is wrong
+    public static boolean inputMenuMismatchCheck(){
+        if (checkMenuInput.equals("mismatch")){
+         checkMenuInput ="";
+         return true;
+     }
+     checkMenuInput ="mismatch";
+     return false;
     }
+
 
 }

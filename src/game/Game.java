@@ -1,24 +1,23 @@
 package game;
 
-import entity.Entity;
 import entity.Event;
-
 import generator.Generator;
-import input.Input;
-public class Game {
 
-    public static boolean loopGame = true;
-    Event event = new Event();
-    Input input = new Input();
-    Entity entity = new Entity();
-    Generator generator = new Generator();
+public class Game {
+    public static boolean gameActive = false;
+    public static boolean weaponMode;
+    public static boolean nextTurn;
+    protected Event event = new Event();
 
     public void runGame() {
         GameMenu gameMenu = new GameMenu();
-        Gameloop gameloop = new Gameloop();
-        gameMenu.gameMenu();
+        GameLoop gameloop = new GameLoop();
+        Generator generator = new Generator();
+        gameMenu.gameStartMenu();
         generator.runGenerator();
-        System.out.println(GameMessage.startGameMessage);
-        gameloop.GameLoop();
+        System.out.println(GameMessage.GAME_OPENING_MESSAGE);
+        event.audioPlayer("src/entity/sound/BackGround.wav");
+        gameActive = true;
+        gameloop.gameLoop();
     }
 }
